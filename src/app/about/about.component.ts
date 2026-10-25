@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PRINCIPLES } from '../content/portfolio-content';
 
 @Component({
   selector: 'app-about',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-
+  readonly principles = PRINCIPLES;
 }

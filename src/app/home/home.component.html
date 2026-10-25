@@ -1,52 +1,156 @@
 <section id="hero" class="hero">
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="container hero__grid">
-    <div class="hero__copy">
-      <p class="eyebrow">Software developer · 6+ years</p>
-      <h1>Reliable web applications, from the interface to the database.</h1>
-      <p class="lede">
-        I help businesses build, connect, and improve software that people actually use.
-        My strongest work is in .NET backends and APIs, and I also implement the frontend
-        pieces that make those systems usable.
+  <div class="hero-backdrop" aria-hidden="true">
+    <div class="hero-backdrop__grid"></div>
+    <div class="hero-backdrop__glow hero-backdrop__glow--one"></div>
+    <div class="hero-backdrop__glow hero-backdrop__glow--two"></div>
+    <span class="hero-backdrop__monogram">MU</span>
+    <span class="hero-backdrop__rail">SOFTWARE ENGINEER · PORTFOLIO / 2026</span>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="hero-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Available for freelance work</span>
+        <span class="hero-status__sep" aria-hidden="true">/</span>
+        <span>Pakistan</span>
       </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="#contact">Discuss your project</a>
-        <a class="btn btn--ghost" href="#work">Explore my work</a>
+
+      <h1 class="hero-title">
+        <span class="hero-title__line"><span>Software that</span></span>
+        <span class="hero-title__line"><span><em>holds up.</em></span></span>
+      </h1>
+
+      <p class="hero-lede">
+        I'm <strong>Muhammad Umer</strong>, a software developer with 6+ years of experience
+        building .NET backends, APIs, and the interfaces that connect them. I help teams ship
+        reliable business software — and keep it maintainable.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn--primary" href="#work">
+          <span>Explore selected work</span>
+          <app-icon name="arrow-down"></app-icon>
+        </a>
+        <a class="btn btn--ghost" href="#contact">
+          <span>Start a conversation</span>
+          <app-icon name="arrow-up-right"></app-icon>
+        </a>
       </div>
-      <ul class="hero__tags" aria-label="Core skills">
-        <li>.NET</li>
-        <li>APIs</li>
-        <li>SQL</li>
-        <li>JavaScript</li>
-        <li>Angular</li>
-      </ul>
+
+      <dl class="hero-facts">
+        <div>
+          <dt>Experience</dt>
+          <dd>6+ years</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>.NET · APIs · Angular</dd>
+        </div>
+        <div>
+          <dt>Working</dt>
+          <dd>Freelance &amp; remote</dd>
+        </div>
+      </dl>
     </div>
 
-    <aside class="hero__visual" aria-label="How I work across an application">
-      <figure class="portrait-frame">
-        <img
-          src="assets/img/MyProfile-image.jpg"
-          alt="Portrait of Muhammad Umer, software developer"
-          width="640"
-          height="800">
-      </figure>
-      <div class="stack-card">
-        <p class="stack-card__label">What I connect</p>
-        <ol class="stack-list">
-          <li>
-            <span>Interfaces</span>
-            <small>JavaScript, Angular, HTML, CSS</small>
-          </li>
-          <li class="is-accent">
-            <span>Services &amp; APIs</span>
-            <small>C#, .NET, ASP.NET Web API</small>
-          </li>
-          <li>
-            <span>Data</span>
-            <small>SQL, MySQL, Entity Framework</small>
-          </li>
-        </ol>
+    <div class="hero-visual">
+      <div class="hero-visual__head">
+        <span>system.map</span>
+        <span>{{ activeLayerLabel }} &mdash; active layer</span>
       </div>
-    </aside>
+
+      <div class="console" appTilt appSpotlight>
+        <div class="console__chrome">
+          <span class="console__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="console__path">umer@systems:~/stack</span>
+          <span class="console__live"><i aria-hidden="true"></i> connected</span>
+        </div>
+
+        <div class="console__body">
+          <div class="console__profile">
+            <img
+              src="assets/img/umer-portrait-160.jpg"
+              alt=""
+              width="56"
+              height="56"
+              decoding="async" />
+            <div class="console__identity">
+              <strong>Muhammad Umer</strong>
+              <span>Software developer</span>
+            </div>
+            <span class="console__years">6+ yrs</span>
+          </div>
+
+          <div class="console__meta">
+            <span>layer inspector</span>
+            <span aria-hidden="true">hover / focus</span>
+          </div>
+
+          <ol class="console-layers" aria-label="Technology layers">
+            <li *ngFor="let layer of layers; let i = index" [class.is-active]="activeLayer === layer.id">
+              <button
+                type="button"
+                class="console-layer"
+                [attr.aria-pressed]="activeLayer === layer.id"
+                (mouseenter)="selectLayer(layer.id)"
+                (focus)="selectLayer(layer.id)"
+                (click)="selectLayer(layer.id)">
+                <span class="console-layer__index">0{{ i + 1 }}</span>
+                <span class="console-layer__icon"><app-icon [name]="layer.icon"></app-icon></span>
+                <span class="console-layer__text">
+                  <strong>{{ layer.title }}</strong>
+                  <small>{{ layer.detail }}</small>
+                </span>
+                <span class="console-layer__state">{{ layer.state }}</span>
+              </button>
+            </li>
+            <span class="console-layers__pulse" aria-hidden="true"></span>
+          </ol>
+
+          <div class="console__readout">
+            <div>
+              <span>Focus</span>
+              <strong>End-to-end delivery</strong>
+            </div>
+            <div>
+              <span>Mindset</span>
+              <strong>Production first</strong>
+            </div>
+          </div>
+        </div>
+
+        <span class="console__glare" aria-hidden="true"></span>
+      </div>
+
+      <a class="stamp" href="#contact" aria-label="AVAILABLE FOR FREELANCE · BASED IN PAKISTAN · START A CONVERSATION">
+        <svg class="stamp__ring" viewBox="0 0 120 120" aria-hidden="true">
+          <defs>
+            <path
+              id="stamp-path"
+              d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
+          </defs>
+          <text>
+            <textPath href="#stamp-path" startOffset="0">
+              AVAILABLE FOR FREELANCE · BASED IN PAKISTAN ·
+            </textPath>
+          </text>
+        </svg>
+        <span class="stamp__center"><app-icon name="arrow-up-right"></app-icon></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container hero-scroll" aria-hidden="true">
+    <span>Scroll to explore</span>
+    <span class="hero-scroll__line"></span>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <div class="ticker__group" *ngFor="let group of [0, 1]">
+        <span *ngFor="let tech of stack">{{ tech }}<i></i></span>
+      </div>
+    </div>
   </div>
 </section>

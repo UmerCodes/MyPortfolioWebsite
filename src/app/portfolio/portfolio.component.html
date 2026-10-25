@@ -1,68 +1,165 @@
-<section id="work" class="section section--alt">
+<section id="work" class="section work">
   <div class="container">
-    <header class="section-head">
-      <p class="eyebrow">Selected work</p>
-      <h2>The kinds of problems I have already solved.</h2>
-      <p>
-        These summaries come from professional work on production applications. They describe
-        the problem and my contribution, without invented metrics or placeholder screenshots.
-      </p>
+    <header class="section-head" appReveal>
+      <div class="section-head__meta">
+        <span class="section-index">01</span>
+        <span class="eyebrow">Selected work</span>
+        <span class="section-head__rule" aria-hidden="true"></span>
+        <span class="section-head__note">Production systems · no invented metrics</span>
+      </div>
+      <div class="section-head__grid">
+        <h2>Problems solved <em>in production.</em></h2>
+        <p>
+          These summaries come from professional work on real business applications. They describe
+          the problem and my contribution — not placeholder screenshots or made-up numbers.
+        </p>
+      </div>
     </header>
 
-    <div class="work-list">
-      <article class="work-card">
-        <div class="work-card__top">
-          <h3>Document management systems</h3>
-          <p class="work-card__role">.NET applications and Windows services</p>
-        </div>
-        <p>
-          Business teams needed web applications that could manage documents and keep related
-          background jobs running. I maintained and improved .NET web applications and Windows
-          services, including automation that reduced repetitive bulk data entry into grids.
-        </p>
-        <ul class="tech-list" aria-label="Technologies">
-          <li>.NET</li>
-          <li>C#</li>
-          <li>Windows Services</li>
-          <li>Web applications</li>
-        </ul>
-      </article>
+    <div class="work-layout" appReveal [revealDelay]="80">
+      <div class="work-tabs" role="tablist" aria-label="Selected work" aria-orientation="vertical">
+        <button
+          *ngFor="let item of cases; let i = index"
+          type="button"
+          class="work-tab"
+          role="tab"
+          [id]="'work-tab-' + item.id"
+          [class.is-active]="selected.id === item.id"
+          [attr.aria-selected]="selected.id === item.id"
+          [attr.aria-controls]="selected.id === item.id ? 'work-panel-' + item.id : null"
+          [attr.tabindex]="selected.id === item.id ? 0 : -1"
+          (click)="select(item.id)"
+          (keydown)="onTabKeydown($event, i)">
+          <span class="work-tab__index">0{{ i + 1 }}</span>
+          <span class="work-tab__body">
+            <strong>{{ item.title }}</strong>
+            <small>{{ item.kicker }}</small>
+          </span>
+          <span class="work-tab__arrow"><app-icon name="arrow-up-right"></app-icon></span>
+        </button>
+      </div>
 
-      <article class="work-card">
-        <div class="work-card__top">
-          <h3>Batch reporting for business data</h3>
-          <p class="work-card__role">Excel and PDF generation</p>
-        </div>
-        <p>
-          Reporting often has to leave the application as files people can share. I developed
-          batch-based reporting modules that generate Excel and PDF output from application data,
-          tailored to how the business needed to review and distribute that information.
-        </p>
-        <ul class="tech-list" aria-label="Technologies">
-          <li>.NET</li>
-          <li>Excel reporting</li>
-          <li>PDF generation</li>
-          <li>Background processing</li>
-        </ul>
-      </article>
+      <article
+        class="work-panel"
+        role="tabpanel"
+        tabindex="0"
+        [id]="'work-panel-' + selected.id"
+        [attr.aria-labelledby]="'work-tab-' + selected.id">
+        <div class="work-panel__visual" [ngSwitch]="selected.visual" aria-hidden="true">
+          <ng-container *ngSwitchCase="'documents'">
+            <div class="viz-window viz-window--documents">
+              <div class="viz-window__bar">
+                <span class="viz-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>document.queue</span>
+                <span class="viz-tag">live</span>
+              </div>
+              <div class="viz-window__body">
+                <div class="doc-row" *ngFor="let doc of documents">
+                  <span class="doc-row__icon"><app-icon name="window"></app-icon></span>
+                  <span class="doc-row__name">{{ doc.name }}</span>
+                  <span class="doc-row__meta">{{ doc.meta }}</span>
+                  <span class="doc-row__state" [class.is-ready]="doc.state === 'Ready'">
+                    {{ doc.state }}
+                  </span>
+                </div>
+                <div class="doc-automation">
+                  <span>bulk entry automation</span>
+                  <span class="doc-automation__track" aria-hidden="true"><i></i></span>
+                  <span class="doc-automation__state">active</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
 
-      <article class="work-card">
-        <div class="work-card__top">
-          <h3>Backend APIs for business operations</h3>
-          <p class="work-card__role">Service migration and feature work</p>
+          <ng-container *ngSwitchCase="'reports'">
+            <div class="viz-window viz-window--reports">
+              <div class="viz-window__bar">
+                <span class="viz-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>batch.report</span>
+                <span class="viz-tag">export</span>
+              </div>
+              <div class="viz-window__body">
+                <div class="report-table">
+                  <div class="report-table__head">
+                    <span>Batch</span><span>Scope</span><span>Output</span>
+                  </div>
+                  <div class="report-table__row" *ngFor="let row of reportRows">
+                    <span>{{ row.batch }}</span>
+                    <span>{{ row.scope }}</span>
+                    <span class="report-table__output" [class.is-muted]="row.status === 'Queued'">
+                      {{ row.status }}
+                    </span>
+                  </div>
+                </div>
+                <div class="report-exports">
+                  <span><app-icon name="check"></app-icon> Excel</span>
+                  <span><app-icon name="check"></app-icon> PDF</span>
+                  <span class="report-exports__generating">generating batch...</span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'api'">
+            <div class="viz-window viz-window--api">
+              <div class="viz-window__bar">
+                <span class="viz-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>api.client</span>
+                <span class="viz-tag">200 ok</span>
+              </div>
+              <div class="viz-window__body">
+                <div class="api-route">
+                  <span class="api-method">GET</span>
+                  <code>/limits</code>
+                  <span class="api-status">200</span>
+                </div>
+                <div class="api-route">
+                  <span class="api-method api-method--post">POST</span>
+                  <code>/transactions</code>
+                  <span class="api-status">200</span>
+                </div>
+                <pre class="api-response"><code><span class="api-brace">{{ '{' }}</span>
+  <span class="api-key">"service"</span>: <span class="api-value">"business-api"</span>,
+  <span class="api-key">"features"</span>: [<span class="api-value">"limits"</span>, <span class="api-value">"transactions"</span>],
+  <span class="api-key">"data"</span>: <span class="api-value">"ready"</span>
+<span class="api-brace">{{ '}' }}</span></code></pre>
+                <div class="api-pulse" aria-hidden="true"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </ng-container>
+
+          <span class="work-panel__caption">Illustrative system diagram — not a client screenshot</span>
         </div>
-        <p>
-          I migrated backend services and improved APIs used in business applications, including
-          work on banking-related solutions. That included features such as limit management and
-          transaction history, with attention to performance and dependable data handling.
-        </p>
-        <ul class="tech-list" aria-label="Technologies">
-          <li>REST APIs</li>
-          <li>.NET</li>
-          <li>SQL</li>
-          <li>Feature development</li>
-        </ul>
+
+        <div class="work-panel__content">
+          <p class="work-panel__kicker">{{ selected.kicker }}</p>
+          <h3>{{ selected.title }}</h3>
+          <p class="work-panel__summary">{{ selected.summary }}</p>
+
+          <ul class="work-panel__list">
+            <li *ngFor="let contribution of selected.contributions">
+              <span aria-hidden="true"></span>
+              {{ contribution }}
+            </li>
+          </ul>
+
+          <div class="work-panel__footer">
+            <ul class="tech-list" aria-label="Technologies used">
+              <li *ngFor="let tech of selected.tech">{{ tech }}</li>
+            </ul>
+            <a class="text-link" href="#contact">
+              Discuss similar work
+              <app-icon name="arrow-up-right"></app-icon>
+            </a>
+          </div>
+        </div>
       </article>
     </div>
+
+    <p class="work-note" appReveal>
+      <app-icon name="spark"></app-icon>
+      Client names and screenshots are intentionally withheld. The work described reflects real
+      production experience; the diagrams are abstractions.
+    </p>
   </div>
 </section>

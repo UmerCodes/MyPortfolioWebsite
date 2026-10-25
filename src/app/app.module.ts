@@ -10,6 +10,11 @@ import { ResumeComponent } from './resume/resume.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
+import { IconComponent } from './shared/components/icon/icon.component';
+import { RevealDirective } from './shared/directives/reveal.directive';
+import { ScrollProgressDirective } from './shared/directives/scroll-progress.directive';
+import { SpotlightDirective } from './shared/directives/spotlight.directive';
+import { TiltDirective } from './shared/directives/tilt.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { ContactComponent } from './contact/contact.component';
     ResumeComponent,
     PortfolioComponent,
     ServicesComponent,
-    ContactComponent
+    ContactComponent,
+    IconComponent,
+    RevealDirective,
+    ScrollProgressDirective,
+    SpotlightDirective,
+    TiltDirective
   ],
   imports: [
     BrowserModule,

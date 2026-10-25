@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { IconComponent } from '../shared/components/icon/icon.component';
+import { SpotlightDirective } from '../shared/directives/spotlight.directive';
+import { TiltDirective } from '../shared/directives/tilt.directive';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +11,7 @@ describe('HomeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent]
+      declarations: [HomeComponent, IconComponent, SpotlightDirective, TiltDirective]
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

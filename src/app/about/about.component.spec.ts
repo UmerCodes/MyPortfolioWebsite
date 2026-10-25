@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AboutComponent } from './about.component';
+import { IconComponent } from '../shared/components/icon/icon.component';
+import { RevealDirective } from '../shared/directives/reveal.directive';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -8,7 +10,7 @@ describe('AboutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AboutComponent]
+      declarations: [AboutComponent, IconComponent, RevealDirective]
     });
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;

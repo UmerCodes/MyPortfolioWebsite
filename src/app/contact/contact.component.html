@@ -1,64 +1,179 @@
 <section id="contact" class="section contact">
-  <div class="container contact-grid">
-    <div>
-      <header class="section-head section-head--left">
-        <p class="eyebrow">Contact</p>
-        <h2>Tell me what you need built, fixed, or connected.</h2>
-        <p>
-          You do not need desktop email software. Copy the address, copy your message, or open
-          Gmail in the browser and send from there.
-        </p>
-      </header>
+  <div class="contact-backdrop" aria-hidden="true">
+    <span class="contact-backdrop__word">SAY HELLO</span>
+    <span class="contact-backdrop__glow"></span>
+  </div>
 
-      <ul class="contact-list">
-        <li>
-          <span class="contact-list__label">Email</span>
-          <a [href]="'mailto:' + email">{{ email }}</a>
-          <button type="button" class="text-btn" (click)="copyEmail()">Copy email</button>
-        </li>
-        <li>
-          <span class="contact-list__label">Phone</span>
-          <a [href]="phoneHref">{{ phoneDisplay }}</a>
-        </li>
-        <li>
-          <span class="contact-list__label">GitHub</span>
-          <a [href]="github" target="_blank" rel="noopener noreferrer">github.com/UmerCodes</a>
-        </li>
-      </ul>
+  <div class="container">
+    <div class="contact-top" appReveal>
+      <div class="contact-top__copy">
+        <div class="contact-meta">
+          <span class="section-index">05</span>
+          <span class="eyebrow">Contact</span>
+          <span class="contact-meta__rule" aria-hidden="true"></span>
+        </div>
+        <h2>Have something that needs building — or <em>fixing?</em></h2>
+        <p>
+          Tell me what you are working on, what is getting in the way, and what a good outcome looks
+          like. No obligation, no sales script.
+        </p>
+      </div>
+
+      <aside class="contact-availability" aria-label="Availability">
+        <p class="contact-availability__status">
+          <span class="status-dot" aria-hidden="true"></span>
+          Available for freelance work
+        </p>
+        <dl>
+          <div>
+            <dt>Location</dt>
+            <dd>Pakistan</dd>
+          </div>
+          <div>
+            <dt>Working</dt>
+            <dd>Remote &amp; freelance</dd>
+          </div>
+          <div>
+            <dt>Focus</dt>
+            <dd>.NET · APIs · Angular</dd>
+          </div>
+        </dl>
+      </aside>
     </div>
 
-    <form class="contact-form" (ngSubmit)="copyInquiry($event)" novalidate>
-      <p class="contact-form__note">
-        This does not send a message from the website. It copies your note or opens Gmail so you
-        can send it yourself.
-      </p>
+    <div class="contact-grid">
+      <div class="contact-details" appReveal>
+        <p class="contact-details__label">Direct line</p>
 
-      <div class="field">
-        <label for="contact-name">Name</label>
-        <input id="contact-name" name="name" type="text" [(ngModel)]="name" autocomplete="name" required>
+        <a class="contact-email" [href]="'mailto:' + email">
+          <span class="contact-email__value">{{ email }}</span>
+          <span class="contact-email__icon"><app-icon name="arrow-up-right"></app-icon></span>
+        </a>
+
+        <button type="button" class="copy-email" (click)="copyEmail()">
+          <app-icon [name]="emailCopied ? 'check' : 'copy'"></app-icon>
+          <span>{{ emailCopied ? 'Copied to clipboard' : 'Copy email address' }}</span>
+        </button>
+
+        <div class="contact-channels">
+          <a [href]="phoneHref">
+            <span class="contact-channels__icon"><app-icon name="phone"></app-icon></span>
+            <span>
+              <small>Phone</small>
+              {{ phoneDisplay }}
+            </span>
+          </a>
+          <a [href]="github" target="_blank" rel="noopener noreferrer">
+            <span class="contact-channels__icon"><app-icon name="github"></app-icon></span>
+            <span>
+              <small>GitHub</small>
+              github.com/UmerCodes
+            </span>
+          </a>
+        </div>
+
+        <p class="contact-details__note">
+          Prefer email? Write directly. Prefer a form? Compose below and copy the finished message
+          into your mail client — nothing is submitted to a server from this page.
+        </p>
       </div>
 
-      <div class="field">
-        <label for="contact-email">Your email</label>
-        <input id="contact-email" name="email" type="email" [(ngModel)]="fromEmail" autocomplete="email" required>
-      </div>
+      <form class="contact-form" (ngSubmit)="copyInquiry($event)" novalidate appReveal [revealDelay]="90">
+        <div class="contact-form__head">
+          <div>
+            <p class="contact-form__kicker">Project inquiry</p>
+            <h3>Compose a message</h3>
+          </div>
+          <span class="contact-form__badge">composed locally</span>
+        </div>
 
-      <div class="field">
-        <label for="contact-subject">Subject</label>
-        <input id="contact-subject" name="subject" type="text" [(ngModel)]="subject" required>
-      </div>
+        <p class="contact-form__note">
+          Fill this in, then copy the message or open Gmail. You can send it from whichever email
+          service you already use.
+        </p>
 
-      <div class="field">
-        <label for="contact-message">Project details</label>
-        <textarea id="contact-message" name="message" rows="6" [(ngModel)]="message" required></textarea>
-      </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="contact-name">Name</label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              [(ngModel)]="name"
+              autocomplete="name"
+              placeholder="Your name"
+              required
+              [attr.aria-invalid]="submitted && !name.trim() ? 'true' : null"
+              [class.is-invalid]="submitted && !name.trim()" />
+          </div>
 
-      <div class="contact-actions">
-        <button class="btn btn--primary" type="submit">Copy message</button>
-        <button class="btn btn--ghost" type="button" (click)="openGmail()">Open in Gmail</button>
-      </div>
+          <div class="field">
+            <label for="contact-email">Your email</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              [(ngModel)]="fromEmail"
+              autocomplete="email"
+              placeholder="you@company.com"
+              required
+              [attr.aria-invalid]="emailInvalid ? 'true' : null"
+              [class.is-invalid]="emailInvalid" />
+          </div>
 
-      <p class="form-status" *ngIf="status" [class.is-error]="statusKind === 'error'" role="status">{{ status }}</p>
-    </form>
+          <div class="field field--full">
+            <label for="contact-subject">Subject</label>
+            <input
+              id="contact-subject"
+              name="subject"
+              type="text"
+              [(ngModel)]="subject"
+              placeholder="What should we talk about?"
+              required
+              [attr.aria-invalid]="submitted && !subject.trim() ? 'true' : null"
+              [class.is-invalid]="submitted && !subject.trim()" />
+          </div>
+
+          <div class="field field--full">
+            <label for="contact-message">Project details</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              [(ngModel)]="message"
+              placeholder="A little context about the system, the goal, and where it is stuck."
+              required
+              [attr.aria-invalid]="submitted && !message.trim() ? 'true' : null"
+              [class.is-invalid]="submitted && !message.trim()"></textarea>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <button class="btn btn--primary" type="submit">
+            <span>Copy message</span>
+            <app-icon name="copy"></app-icon>
+          </button>
+          <button class="btn btn--ghost" type="button" (click)="openGmail()">
+            <span>Open in Gmail</span>
+            <app-icon name="external"></app-icon>
+          </button>
+        </div>
+
+        <p
+          class="form-status"
+          *ngIf="status"
+          [class.is-error]="statusKind === 'error'"
+          role="status"
+          aria-live="polite">
+          <app-icon [name]="statusKind === 'error' ? 'close' : 'check'"></app-icon>
+          <span>{{ status }}</span>
+        </p>
+
+        <p class="contact-form__privacy">
+          <app-icon name="pin"></app-icon>
+          Your details stay in this browser until you choose to send them.
+        </p>
+      </form>
+    </div>
   </div>
 </section>

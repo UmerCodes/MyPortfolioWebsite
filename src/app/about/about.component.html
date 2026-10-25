@@ -1,49 +1,104 @@
-<section id="about" class="section section--alt">
-  <div class="container about-grid">
-    <div class="about-copy">
-      <header class="section-head section-head--left">
-        <p class="eyebrow">About</p>
-        <h2>A practical developer who can pick up an existing system and move it forward.</h2>
-      </header>
-      <p>
-        I am a software developer with more than six years of professional experience.
-        Most of that time has been spent on backend work in C# and .NET, from older Framework
-        applications to more modern .NET services.
-      </p>
-      <p>
-        I also work on frontend interfaces in JavaScript, jQuery, and Angular, especially when
-        a feature needs both a usable screen and a dependable API behind it. That mix is useful
-        for clients who need someone to implement, integrate, or repair software rather than
-        start from a blank design file.
-      </p>
-      <p>
-        I can adapt to other backend technologies when a project requires it, but I do not
-        pretend to be a specialist in every stack. If you have an application that needs new
-        functionality, a cleaner integration, or steady maintenance, that is the work I am set
-        up to do.
-      </p>
-      <dl class="fact-list">
-        <div>
-          <dt>Based in</dt>
-          <dd>Pakistan</dd>
-        </div>
-        <div>
-          <dt>Education</dt>
-          <dd>Bachelor in Computer Science</dd>
-        </div>
-        <div>
-          <dt>Available for</dt>
-          <dd>Freelance project work</dd>
-        </div>
-      </dl>
-    </div>
+<section id="about" class="section about">
+  <span class="about-watermark" aria-hidden="true">ABOUT</span>
 
-    <figure class="about-portrait">
-      <img
-        src="assets/img/MyProfile-image.jpg"
-        alt="Muhammad Umer"
-        width="720"
-        height="900">
-    </figure>
+  <div class="container">
+    <header class="section-head" appReveal>
+      <div class="section-head__meta">
+        <span class="section-index">04</span>
+        <span class="eyebrow">About</span>
+        <span class="section-head__rule" aria-hidden="true"></span>
+        <span class="section-head__note">Practical over performative</span>
+      </div>
+      <div class="section-head__grid">
+        <h2>A practical developer who can pick up an existing system and <em>move it forward.</em></h2>
+        <p>
+          Most projects do not start from a blank page. My value is in understanding what already
+          exists, making thoughtful changes, and leaving the system easier to work with.
+        </p>
+      </div>
+    </header>
+
+    <div class="about-grid">
+      <div class="about-visual" appReveal>
+        <span class="about-visual__frame" aria-hidden="true"></span>
+
+        <figure class="about-portrait">
+          <img
+            src="assets/img/umer-portrait-900.jpg"
+            srcset="
+              assets/img/umer-portrait-480.jpg 480w,
+              assets/img/umer-portrait-900.jpg 900w
+            "
+            sizes="(max-width: 760px) 92vw, (max-width: 1024px) 60vw, 38vw"
+            alt="Portrait of Muhammad Umer, software developer"
+            width="720"
+            height="954"
+            loading="lazy"
+            decoding="async" />
+          <figcaption class="about-portrait__caption">
+            <span>Muhammad Umer</span>
+            <span>Software developer · Pakistan</span>
+          </figcaption>
+        </figure>
+
+        <aside class="about-card" aria-label="Quick facts">
+          <p class="about-card__status">
+            <span class="status-dot" aria-hidden="true"></span>
+            Available for freelance work
+          </p>
+          <dl class="about-facts">
+            <div>
+              <dt>Based in</dt>
+              <dd>Pakistan</dd>
+            </div>
+            <div>
+              <dt>Education</dt>
+              <dd>BSc Computer Science</dd>
+            </div>
+            <div>
+              <dt>Working</dt>
+              <dd>Remote &amp; freelance</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <span class="about-visual__rail" aria-hidden="true">PK · REMOTE</span>
+      </div>
+
+      <div class="about-copy" appReveal [revealDelay]="90">
+        <p class="about-copy__lead">
+          I am a software developer with more than six years of professional experience. Most of
+          that time has been spent on backend work in C# and .NET, from older Framework applications
+          to more modern .NET services.
+        </p>
+        <p>
+          I also work on frontend interfaces in JavaScript, jQuery, and Angular, especially when a
+          feature needs both a usable screen and a dependable API behind it. That mix is useful for
+          clients who need someone to implement, integrate, or repair software rather than start
+          from a blank design file.
+        </p>
+
+        <blockquote class="about-quote">
+          <p>
+            I do not pretend to be a specialist in every stack. If your application needs new
+            functionality, a cleaner integration, or steady maintenance, that is the work I am set
+            up to do.
+          </p>
+        </blockquote>
+
+        <div class="principles">
+          <p class="principles__label">How I work</p>
+          <ol>
+            <li *ngFor="let principle of principles; let i = index">
+              <span class="principles__number">0{{ i + 1 }}</span>
+              <div>
+                <h3>{{ principle.title }}</h3>
+                <p>{{ principle.description }}</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

@@ -8,6 +8,11 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormsModule } from '@angular/forms';
+import { IconComponent } from './shared/components/icon/icon.component';
+import { RevealDirective } from './shared/directives/reveal.directive';
+import { ScrollProgressDirective } from './shared/directives/scroll-progress.directive';
+import { SpotlightDirective } from './shared/directives/spotlight.directive';
+import { TiltDirective } from './shared/directives/tilt.directive';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -19,7 +24,12 @@ describe('AppComponent', () => {
       ResumeComponent,
       PortfolioComponent,
       ServicesComponent,
-      ContactComponent
+      ContactComponent,
+      IconComponent,
+      RevealDirective,
+      ScrollProgressDirective,
+      SpotlightDirective,
+      TiltDirective
     ]
   }));
 
@@ -29,17 +39,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'MyWebsite-UI'`, () => {
+  it('should expose the portfolio title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('MyWebsite-UI');
+    expect(app.title).toContain('Muhammad Umer');
   });
 
   it('should render the primary navigation', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.brand__name')?.textContent).toContain('Muhammad Umer');
-    expect(compiled.querySelector('.site-nav')).toBeTruthy();
+    expect(compiled.querySelector('.brand__text')?.textContent).toContain('Muhammad Umer');
+    expect(compiled.querySelector('.nav-links')).toBeTruthy();
   });
 });

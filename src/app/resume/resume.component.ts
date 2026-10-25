@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { EXPERIENCE, SKILL_GROUPS } from '../content/portfolio-content';
+import type { LayerId, SkillGroup } from '../content/portfolio-content';
+import type { IconName } from '../shared/components/icon/icon.component';
 
-export interface SkillGroup {
-  id: string;
-  title: string;
-  summary: string;
-  skills: string[];
+interface StackLayerView {
+  id: LayerId;
+  label: string;
+  detail: string;
+  icon: IconName;
 }
 
 @Component({
@@ -13,32 +16,28 @@ export interface SkillGroup {
   styleUrls: ['./resume.component.css']
 })
 export class ResumeComponent {
+  readonly groups = SKILL_GROUPS;
+  readonly experience = EXPERIENCE;
   selectedId = 'backend';
 
-  readonly groups: SkillGroup[] = [
+  readonly stackLayers: StackLayerView[] = [
     {
-      id: 'backend',
-      title: 'Backend',
-      summary: 'The core of my work: application logic, APIs, and database-driven features in C# and .NET, including both older Framework apps and more modern .NET services.',
-      skills: ['C#', '.NET Framework', '.NET / .NET Core', 'ASP.NET MVC', 'ASP.NET Web API']
+      id: 'interface',
+      label: 'Interface',
+      detail: 'Angular · JavaScript · HTML / CSS',
+      icon: 'window'
     },
     {
-      id: 'frontend',
-      title: 'Frontend',
-      summary: 'I build the screens and forms that talk to those services, so users can complete tasks without a separate frontend specialist for every change.',
-      skills: ['JavaScript', 'jQuery', 'Angular', 'HTML', 'CSS']
+      id: 'service',
+      label: 'Service layer',
+      detail: 'C# · .NET · ASP.NET Web API',
+      icon: 'server'
     },
     {
-      id: 'database',
-      title: 'Database and integration',
-      summary: 'I connect applications to data and other systems, including SQL databases, Entity Framework, and REST-based integrations.',
-      skills: ['SQL', 'MySQL', 'Entity Framework', 'REST APIs', 'Database integration']
-    },
-    {
-      id: 'application',
-      title: 'Application work',
-      summary: 'I maintain and extend existing software: Windows services, background jobs, reporting, debugging, and improvements to established codebases.',
-      skills: ['Windows Services', 'Background processing', 'Legacy application maintenance', 'Debugging and enhancement', 'Excel and PDF reporting']
+      id: 'data',
+      label: 'Data layer',
+      detail: 'SQL · MySQL · Entity Framework',
+      icon: 'database'
     }
   ];
 
@@ -46,7 +45,40 @@ export class ResumeComponent {
     return this.groups.find(group => group.id === this.selectedId) ?? this.groups[0];
   }
 
+  get selectedIndex(): number {
+    return Math.max(this.groups.findIndex(group => group.id === this.selectedId), 0);
+  }
+
   select(id: string): void {
     this.selectedId = id;
+  }
+
+  isLayerFocused(id: LayerId): boolean {
+    return this.selected.layers.includes(id);
+  }
+
+  onTabKeydown(event: KeyboardEvent, index: number): void {
+    const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'];
+    if (!keys.includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+    let nextIndex = index;
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+      nextIndex = (index + 1) % this.groups.length;
+    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + this.groups.length) % this.groups.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = this.groups.length - 1;
+    }
+
+    this.selectedId = this.groups[nextIndex].id;
+    window.setTimeout(() => {
+      document.getElementById(`skill-tab-${this.groups[nextIndex].id}`)?.focus();
+    });
   }
 }
