@@ -27,8 +27,17 @@ export class PortfolioComponent {
     return this.cases.find(item => item.id === this.selectedId) ?? this.cases[0];
   }
 
+  get selectedIndex(): number {
+    return Math.max(0, this.cases.findIndex(item => item.id === this.selectedId));
+  }
+
   select(id: string): void {
     this.selectedId = id;
+  }
+
+  selectFromEvent(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.select(value);
   }
 
   onTabKeydown(event: KeyboardEvent, index: number): void {

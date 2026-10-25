@@ -17,6 +17,27 @@
     </header>
 
     <div class="work-layout" appReveal [revealDelay]="80">
+      <div class="work-mobile-nav">
+        <div class="work-mobile-nav__head">
+          <label class="work-mobile-nav__label" for="work-case-select">Case study</label>
+          <span class="work-mobile-nav__count">{{ selectedIndex + 1 }} / {{ cases.length }}</span>
+        </div>
+        <div class="work-mobile-nav__control">
+          <span class="work-mobile-nav__display" aria-hidden="true">{{ selected.title }}</span>
+          <select
+            id="work-case-select"
+            class="work-mobile-nav__select"
+            [value]="selected.id"
+            [attr.aria-controls]="'work-panel-' + selected.id"
+            (change)="selectFromEvent($event)">
+            <option *ngFor="let item of cases; let i = index" [value]="item.id">
+              0{{ i + 1 }} — {{ item.title }}
+            </option>
+          </select>
+          <app-icon name="arrow-down"></app-icon>
+        </div>
+      </div>
+
       <div class="work-tabs" role="tablist" aria-label="Selected work" aria-orientation="vertical">
         <button
           *ngFor="let item of cases; let i = index"

@@ -167,54 +167,6 @@
   transform: translate(2px, -2px);
 }
 
-.service-card--accent {
-  border-color: rgba(242, 237, 227, 0.9);
-  background:
-    radial-gradient(420px circle at var(--spot-x, 70%) var(--spot-y, 0%), rgba(217, 160, 102, 0.2), transparent 62%),
-    var(--cream);
-  color: var(--ink);
-}
-
-.service-card--accent::before {
-  display: none;
-}
-
-.service-card--accent .service-card__index {
-  color: var(--copper-ink);
-}
-
-.service-card--accent .service-card__icon {
-  border-color: rgba(11, 14, 12, 0.16);
-  background: rgba(11, 14, 12, 0.045);
-  color: var(--ink);
-}
-
-.service-card--accent:hover .service-card__icon {
-  border-color: rgba(11, 14, 12, 0.32);
-  background: var(--ink);
-  color: var(--cream);
-}
-
-.service-card--accent h3 {
-  color: var(--ink);
-}
-
-.service-card--accent .service-card__content p {
-  color: rgba(11, 14, 12, 0.68);
-}
-
-.service-card--accent .service-card__footer p {
-  color: rgba(11, 14, 12, 0.6);
-}
-
-.service-card--accent .service-card__arrow {
-  color: var(--ink);
-}
-
-.service-card--accent:hover {
-  border-color: var(--copper-bright);
-}
-
 .service-card--wide {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);

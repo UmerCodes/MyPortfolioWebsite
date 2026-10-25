@@ -20,7 +20,6 @@
       <article
         *ngFor="let service of services; let i = index"
         class="service-card"
-        [class.service-card--accent]="i === 3"
         [class.service-card--wide]="i === 4"
         appReveal
         appSpotlight

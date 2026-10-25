@@ -20,6 +20,92 @@
   gap: 0.55rem;
 }
 
+.work-mobile-nav {
+  display: none;
+}
+
+.work-mobile-nav__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.work-mobile-nav__label,
+.work-mobile-nav__count {
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.work-mobile-nav__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  padding: 0.82rem 3.1rem 0.82rem 1.15rem;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(242, 237, 227, 0.04), transparent 55%),
+    rgba(242, 237, 227, 0.018);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.work-mobile-nav__control:hover {
+  border-color: rgba(217, 160, 102, 0.4);
+}
+
+.work-mobile-nav__control:focus-within {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+.work-mobile-nav__control app-icon {
+  position: absolute;
+  top: 50%;
+  right: 1.15rem;
+  z-index: 1;
+  color: var(--copper);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.work-mobile-nav__display {
+  color: var(--cream);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.work-mobile-nav__select {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  font: inherit;
+  cursor: pointer;
+  opacity: 0;
+  appearance: none;
+}
+
+.work-mobile-nav__select option {
+  background: #151a16;
+  color: var(--cream);
+}
+
 .work-tab {
   display: flex;
   align-items: center;
@@ -633,21 +719,13 @@
     grid-template-columns: 1fr;
   }
 
+  .work-mobile-nav {
+    display: grid;
+    gap: 0.45rem;
+  }
+
   .work-tabs {
-    position: static;
-    display: flex;
-    gap: 0.55rem;
-    overflow-x: auto;
-    padding-bottom: 0.4rem;
-    scrollbar-width: thin;
-  }
-
-  .work-tab {
-    flex: 0 0 min(19rem, 82vw);
-  }
-
-  .work-tab:hover {
-    transform: translateY(-2px);
+    display: none;
   }
 }
 
