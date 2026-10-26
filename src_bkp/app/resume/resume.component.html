@@ -1,0 +1,62 @@
+<section id="skills" class="section">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">Skills and experience</p>
+      <h2>A backend-first toolkit, with enough frontend range to finish the job.</h2>
+      <p>
+        I am strongest in .NET and database-driven applications. I also work on the interfaces
+        that consume those services, which helps when a project needs more than one layer.
+        Choose a group to see how I typically use it.
+      </p>
+    </header>
+
+    <div class="skill-board" role="tablist" aria-label="Skill groups">
+      <button
+        *ngFor="let group of groups"
+        type="button"
+        class="skill-group"
+        role="tab"
+        [id]="'skill-tab-' + group.id"
+        [attr.aria-selected]="selectedId === group.id"
+        [attr.aria-controls]="'skill-panel-' + group.id"
+        [class.is-active]="selectedId === group.id"
+        (click)="select(group.id)">
+        <span class="skill-group__title">{{ group.title }}</span>
+        <ul>
+          <li *ngFor="let skill of group.skills">{{ skill }}</li>
+        </ul>
+      </button>
+    </div>
+
+    <div
+      class="skill-detail"
+      role="tabpanel"
+      [id]="'skill-panel-' + selected.id"
+      [attr.aria-labelledby]="'skill-tab-' + selected.id">
+      <p class="skill-detail__label">{{ selected.title }}</p>
+      <p>{{ selected.summary }}</p>
+    </div>
+
+    <div class="experience">
+      <h3 class="experience__title">Recent professional focus</h3>
+      <div class="experience__grid">
+        <article class="experience-item">
+          <p class="experience-item__when">2023 — Present</p>
+          <h4>Software engineer, freelance and remote projects</h4>
+          <p>
+            Continuing work on .NET applications, APIs, Windows services, reporting modules,
+            and application maintenance for existing business systems.
+          </p>
+        </article>
+        <article class="experience-item">
+          <p class="experience-item__when">2021 — 2023</p>
+          <h4>Software engineer, freelance and remote projects</h4>
+          <p>
+            Backend service migration, API improvements, and feature development in established
+            applications, including collaboration with stakeholders and QA on delivery.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

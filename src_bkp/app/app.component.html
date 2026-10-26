@@ -1,0 +1,65 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="#hero" (click)="scrollToSection($event, '#hero')">
+      <span class="brand__mark" aria-hidden="true">MU</span>
+      <span class="brand__text">
+        <span class="brand__name">Muhammad Umer</span>
+        <span class="brand__role">Software Developer</span>
+      </span>
+    </a>
+
+    <nav
+      id="site-nav"
+      class="site-nav"
+      [class.is-open]="menuOpen"
+      aria-label="Primary">
+      <ul class="site-nav__list">
+        <li *ngFor="let item of navItems">
+          <a [href]="item.href" (click)="scrollToSection($event, item.href)">{{ item.label }}</a>
+        </li>
+      </ul>
+      <a class="btn btn--primary site-nav__cta" href="#contact" (click)="scrollToSection($event, '#contact')">Discuss your project</a>
+    </nav>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="site-nav"
+      (click)="toggleMenu()">
+      <span class="visually-hidden">{{ menuOpen ? 'Close menu' : 'Open menu' }}</span>
+      <i class="bi" [ngClass]="menuOpen ? 'bi-x-lg' : 'bi-list'" aria-hidden="true"></i>
+    </button>
+  </div>
+</header>
+
+<div class="nav-backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
+
+<main id="main">
+  <app-home></app-home>
+  <app-services></app-services>
+  <app-portfolio></app-portfolio>
+  <app-resume></app-resume>
+  <app-about></app-about>
+  <app-contact></app-contact>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-kicker">Muhammad Umer</p>
+      <p class="footer-copy">Software developer helping clients build, integrate, and maintain reliable applications.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:muhammadumersince1996@gmail.com">Email</a>
+      <a href="tel:+923362824377">Phone</a>
+      <a href="https://github.com/UmerCodes" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="#work">Work</a>
+    </div>
+  </div>
+  <div class="container footer-meta">
+    <p>&copy; {{ currentYear }} Muhammad Umer. All rights reserved.</p>
+  </div>
+</footer>

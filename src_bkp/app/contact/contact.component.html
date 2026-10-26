@@ -1,0 +1,64 @@
+<section id="contact" class="section contact">
+  <div class="container contact-grid">
+    <div>
+      <header class="section-head section-head--left">
+        <p class="eyebrow">Contact</p>
+        <h2>Tell me what you need built, fixed, or connected.</h2>
+        <p>
+          You do not need desktop email software. Copy the address, copy your message, or open
+          Gmail in the browser and send from there.
+        </p>
+      </header>
+
+      <ul class="contact-list">
+        <li>
+          <span class="contact-list__label">Email</span>
+          <a [href]="'mailto:' + email">{{ email }}</a>
+          <button type="button" class="text-btn" (click)="copyEmail()">Copy email</button>
+        </li>
+        <li>
+          <span class="contact-list__label">Phone</span>
+          <a [href]="phoneHref">{{ phoneDisplay }}</a>
+        </li>
+        <li>
+          <span class="contact-list__label">GitHub</span>
+          <a [href]="github" target="_blank" rel="noopener noreferrer">github.com/UmerCodes</a>
+        </li>
+      </ul>
+    </div>
+
+    <form class="contact-form" (ngSubmit)="copyInquiry($event)" novalidate>
+      <p class="contact-form__note">
+        This does not send a message from the website. It copies your note or opens Gmail so you
+        can send it yourself.
+      </p>
+
+      <div class="field">
+        <label for="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" [(ngModel)]="name" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="contact-email">Your email</label>
+        <input id="contact-email" name="email" type="email" [(ngModel)]="fromEmail" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label for="contact-subject">Subject</label>
+        <input id="contact-subject" name="subject" type="text" [(ngModel)]="subject" required>
+      </div>
+
+      <div class="field">
+        <label for="contact-message">Project details</label>
+        <textarea id="contact-message" name="message" rows="6" [(ngModel)]="message" required></textarea>
+      </div>
+
+      <div class="contact-actions">
+        <button class="btn btn--primary" type="submit">Copy message</button>
+        <button class="btn btn--ghost" type="button" (click)="openGmail()">Open in Gmail</button>
+      </div>
+
+      <p class="form-status" *ngIf="status" [class.is-error]="statusKind === 'error'" role="status">{{ status }}</p>
+    </form>
+  </div>
+</section>
